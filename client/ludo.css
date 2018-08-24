@@ -1,0 +1,213 @@
+body {
+     background-color:#99b5b3;    
+}
+
+td{
+    background-color:#d5d8e0;
+}
+
+.safe{
+    background-color:pink;
+   // background-repeat:no-repeat;    
+   // background:radial-gradient(#ff5555,yellow,#0099ff,#7eff7b);
+   //background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px"><text x="5" y="15" font-family="FontAwesome">x&#xf2d3;</text></svg>'); 
+}
+
+/*.safe:before{
+    z-index:-100;    
+    content:'\2605';  
+    line-height:12px;  
+    font-size:20px;
+    display:block;
+    line-height:24px;
+}*/
+
+.class-dice{
+    position:absolute;
+    margin:auto;
+    height:80px;
+    width:80px;
+    //border:4px solid black;
+    text-align:center;
+    line-height:80px;
+    background-color:#cfcfd1;
+    font-size:30px;
+    font-style:bolder;
+    border-radius:30%;
+    box-shadow:5px 5px 10px 0px black;
+  //  display:inline-block ;
+    left:70%;
+    margin-top:10%;
+}
+
+.ndc{
+    top:30%;
+    margin:auto;
+    position:relative;
+    background-color:red;
+    display:inline-block ;
+    text-align:center;
+    width:100%;
+}
+
+#pname{
+   // display:inline-block ;
+    position:absolute;
+    margin:auto;
+    height:80px;
+    width:80px;
+    border:4px dotted black;
+    text-align:center;
+    line-height:80px;
+    background-color:#cfcfd1;
+    font-size:30px;
+    font-style:bolder;
+    border-radius:30%;
+    box-shadow:-5px 5px 10px 0px black;   
+    right:70%;
+    margin-top:10%;
+}
+
+#hpname{
+    position:absolute;
+    margin:auto;        
+    text-align:center;    
+    //background-color:#cfcfd1;
+    font-size:30px;
+    font-style:bolder;
+    border-radius:30%;   
+    right:71%;  
+    z-index:100;
+    //top:0px;   
+}
+
+#hdice{
+    position:absolute;
+    margin:auto;        
+    text-align:center;    
+   // background-color:#cfcfd1;
+    font-size:30px;
+    font-style:bolder;
+    border-radius:30%;   
+    left:73%;  
+    //top:160px;  
+    z-index:100;
+    margin-bottom:10%;
+}
+
+#dice:active{
+    background-color:#a2a3a5;
+    //font-size:35px;
+   // font-style:normal;
+}
+
+table{
+    margin:auto;  
+}
+
+.game-table{
+    border:3px solid black;
+    border-collapse:collapse; 
+}
+
+.game-table td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:0px;
+    width:28px;
+    height:28px;
+    max-height:28px;
+    max-width:28px;
+    overflow:hidden;
+    text-align:center;
+}
+
+.home-table{
+    border:1px solid gray;
+    border-spacing:10px;
+    border:3px solid black;
+    transform:scale(1.1);
+}
+
+.home-table td{
+    border:2px solid black;
+    padding:0px;   
+    width:40px; 
+    height:40px;
+    max-width:40px;
+    max-height:40px;
+    border-radius:50%; 
+    background-color:gray;
+    opacity:0.5;
+}
+
+#end{
+    overflow:hidden;
+    background-color:black;
+}
+
+.home {
+    background-color:gray;
+    width:24px;
+    height:24px;
+    max-height:24px;
+    max-width:24px;
+}
+
+.end-table{
+    transform:rotate(45deg);
+    border-collapse:collapse;
+    //padding:0px;
+}
+
+/*.end-table, .end-table tr{
+    padding:0px;
+    margin:0px;
+}
+
+.end-table td{
+    padding:0px;    
+    margin:0px;    
+}*/
+
+
+
+.container-token{
+    padding:0px;
+    margin:auto;PlayerDice16
+   // background-color:orange;
+    width:24px;
+    height:24px;
+    min-height:9px;
+    min-width:9px;
+    max-width:24px;
+    max-height:24px;
+    overflow-y: auto;
+    border:2px transparent white;
+}
+.token{
+    border:2px solid black;
+    min-width:5px;
+    min-height:5px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+}
+
+.hl{
+    border:2px double red;
+}
+
+.p1{
+    background-color:#7eff7b;
+}
+
+.p2{
+    background-color:#f7bd36;
+}
+.p3{
+    background-color:#ff5555;
+}
+.p4{
+    background-color:#0099ff;
+}
