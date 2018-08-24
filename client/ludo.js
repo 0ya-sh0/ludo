@@ -24,7 +24,7 @@ function Game() {
 
 Game.prototype.appendContainers = function() {
     var p = [];
-    for (let i = 1; i < 52; i++) {
+    for (let i = 1; i <= 52; i++) {
         p.push("c"+i);
     }
     for(let i=1;i<=4;i++)
@@ -298,7 +298,7 @@ Token.prototype.move = function() {
     this.count += game.dice.num;
     this.removeToken();
     this.placeToken(this.count);
-    if(this.cell == "p"+(this.playerId+1)+"6") {
+    if(this.cell == "dp"+(this.playerId+1)+"6") {
         this.tComplete = true;
         this.movable = false;
         this.player.checkComplete();
