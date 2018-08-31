@@ -1,9 +1,4 @@
-
-
 var game, socket = new io(), gameId, playerId;
-/*window.onload = function() {
-    socket = new io();
-}*/
 
 var submitId = function() {
     gameId = document.getElementById("gid").value;
@@ -12,6 +7,25 @@ var submitId = function() {
 
 socket.on("startGame",function(gameId,playerId) {
     createGame(gameId,playerId);
+});
+
+socket.on("succesCreateGame",function(gameId,playerId) {
+    document.getElementById("input-container").style.display = "none";
+    alert("Game created succefully wait for other players to join");
+});
+
+socket.on("succesJoinGame",function(gameId,playerId) {
+    document.getElementById("input-container").style.display = "none";
+    alert("Succesfully joined to the game, waiting for other players");
+});
+
+socket.on("failedCreateGame",function(gameId,playerId) {
+    alert("This game id is used, please try another id");
+});
+
+socket.on("otherQuit",function(gameId,playerId) {
+    alert("User unexpectedly resigned the game, killing the game");
+    setTimeout(document.location.reload(),2000);
 });
 
 var createGame = function(gameId,playerId) {

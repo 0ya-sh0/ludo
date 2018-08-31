@@ -11,14 +11,25 @@ game.prototype.startGame = function() {
         this.ps[i].emit('startGame',this.gameId,i);
     }
     this.isGameOn = true;
-    console.log("starting game: "+this.gameId);
+    console.log("starting @game: "+this.gameId);
 }
  
-game.prototype.endGame = function() {
-    console.log("ending game: "+this.gameId);
+game.prototype.sendOtherQuit = function(sock) {
+    console.log("force killing @game: "+this.gameId);
     for (const i in this.ps) { 
-        delete this.ps[i].gameId;
-        this.ps[i].disconnect();
+        if (this.ps[i]) {
+            this.ps[i].emit("otherQuit");
+        }
+    }
+}
+
+game.prototype.endGame = function() {
+    console.log("ending @game: "+this.gameId);
+    for (const i in this.ps) { 
+        if (this.ps[i]) {
+            this.ps[i].gameId = undefined;
+            this.ps[i].disconnect();
+        }
     }
 }
 
