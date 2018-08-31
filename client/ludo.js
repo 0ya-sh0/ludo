@@ -1,8 +1,9 @@
 
 
-var game;
+var game, socket;
 window.onload = function() {
       game = new Game();
+      socket = io();
 }
 
 /*

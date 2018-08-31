@@ -6,11 +6,11 @@ const app = mexpress();
 const http = mhttp.Server(app);
 const io = mio(http);
 
-const games = new Map();
+//const games = new Map();
 const ipadd2= '192.168.43.1';
 const ipadd1 = '0.0.0.0';
 const ipadd = ipadd1;
-const port = 8080;
+const port = 8000;
 
 http.listen(port,ipadd,function(){
 	console.log(`listening on... http://${ipadd}:${port}`);
@@ -27,3 +27,7 @@ app.get('/ludo.css',function(req,res){
 app.get('/ludo.js',function(req,res){
 	res.sendFile(__dirname + '/client/ludo.js');
 });
+
+io.on("connection",function(socket) {
+	console.log('user');	
+})
