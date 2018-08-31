@@ -30,6 +30,8 @@ socket.on("otherQuit",function(gameId,playerId) {
 
 var createGame = function(gameId,playerId) {
     game = new Game(socket,gameId,playerId);
+    const id = parseInt(playerId) +1;
+    document.getElementById("player-id").innerHTML = "My ID : "+id;
     document.getElementById("input-container").style.display = "none";
     document.getElementById("game-div").style.display = "block";
 }
@@ -61,6 +63,7 @@ function Game(socket,gameId,playerId) {
     this.socket.on("noMoveR",function() {
         game.changePlayer(1);
     });
+    //setTimeout(this.gameComplete,4000);
 }
 
 Game.prototype.appendContainers = function() {
@@ -187,8 +190,12 @@ Game.prototype.checkComplete = function() {
 }
 
 Game.prototype.gameComplete = function() {
-    this.dice.stready = false;
+    game.dice.setReady(false);
     alert("Game complete");
+    setTimeout(document.location.reload(),1000);
+    //if (game.playerId == 0) {
+        this.socket.emit("endGame",game.gameId);
+    //}
 }
 
 /*
