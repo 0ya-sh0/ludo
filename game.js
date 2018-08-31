@@ -22,4 +22,16 @@ game.prototype.endGame = function() {
     }
 }
 
+game.prototype.sendMove = function(dice,tid) {
+    for (const i in this.ps) {
+        this.ps[i].emit("moveR",dice,tid);
+    }
+}
+
+game.prototype.sendNoMove = function(dice,tid) {
+    for (const i in this.ps) {
+        this.ps[i].emit("noMoveR");
+    }
+}
+
 module.exports = game;

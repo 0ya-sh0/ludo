@@ -55,13 +55,24 @@ games.prototype.joinGameHandler = function(socket, id) {
     }
 }
 
-games.prototype.moveHandler = function(socket,cid,g) {
+games.prototype.moveHandler = function(socket,gid, dice, tid) {
     /*console.log(g+" "+cid);
     //console.log(games);
     var p1s = games.get(g).p1s;
     var p2s = games.get(g).p2s;
     p1s.emit('moveR',cid);
     p2s.emit('moveR',cid);*/
+    this.dict.get(gid).sendMove(dice,tid);
+}
+
+games.prototype.noMoveHandler = function(socket,gid) {
+    /*console.log(g+" "+cid);
+    //console.log(games);
+    var p1s = games.get(g).p1s;
+    var p2s = games.get(g).p2s;
+    p1s.emit('moveR',cid);
+    p2s.emit('moveR',cid);*/
+    this.dict.get(gid).sendNoMove();
 }
 
 games.prototype.disconnetHandler = function(socket) {
@@ -85,9 +96,14 @@ games.prototype.connectionHandler = function(socket) {
             this.joinGameHandler(socket, id);
         }).bind(this)
     )
-    socket.on('move',function(cid,g){
-        //this.moveHandler(socket, cid, g);
-    });
+    socket.on('move',(function(gid, dice, tid){
+            this.moveHandler(socket, gid, dice, tid);
+        }).bind(this)
+    );
+    socket.on('noMove',(function(gid){
+            this.noMoveHandler(socket, gid);
+        }).bind(this)
+    );
     socket.on('endGame',function(id){
         //this.endGameHandler(socket,id);
     });

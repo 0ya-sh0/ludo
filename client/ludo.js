@@ -38,7 +38,15 @@ function Game(socket,gameId,playerId) {
     this.currPlayer = 0;
     this.dice = new Dice(this);
     this.changePlayer(-1); 
-    this.socket.emit("joinGame","1234");
+    this.socket.on("moveR",function(di,tid) {
+        game.dice.num = di;
+        game.mover(
+            game.players[game.currPlayer].tokens[parseInt(tid)]
+        );
+    });
+    this.socket.on("noMoveR",function() {
+        game.changePlayer(1);
+    });
 }
 
 Game.prototype.appendContainers = function() {
@@ -83,7 +91,7 @@ Game.prototype.changePlayer = function(pl) {
 }
 
 Game.prototype.clicked = function(id) {
-    if(this.dice.ready)
+    if(this.dice.ready||this.currPlayer!=this.playerId)
         return;
     var pid = parseInt(id[1]);
     if(this.currPlayer!=pid)
@@ -95,7 +103,8 @@ Game.prototype.clicked = function(id) {
         return;       
     if(!rToken.movable) 
         return ;
-    this.mover(rToken);
+    //this.mover(rToken);
+    this.socket.emit("move",this.gameId,this.dice.num,tid);
 }
 
 Game.prototype.mover = function(rToken) {
@@ -141,10 +150,12 @@ Game.prototype.diceRolled = function(){
         }
     }
     if(count<=0) {
-        this.changePlayer(1);
+        //this.changePlayer(1);
+        this.socket.emit("noMove",this.gameId);
     }
     else if(count == 1) {
-        this.mover(rToken);
+        //this.mover(rToken);
+        this.socket.emit("move",this.gameId,this.dice.num,rToken.tid);
     }
 }
 
@@ -231,12 +242,16 @@ Player.prototype.checkComplete = function() {
 function Dice(game){
     this.game = game;
     this.setReady(true);
-    this.num = "roll";
+    if(this.currPlayer == this.playerId)
+        this.num = "roll";
+    else
+        this.num = "wait";
     document.getElementById("dice").innerHTML = this.num;    
 }
 
 Dice.prototype.roll = function() {
-    if(this.ready) {
+    if(this.ready && game.currPlayer == game.playerId) {
+       // alert(game.playerId);
         this.num = Math.floor(Math.random()*6)+1;
         document.getElementById("dice").innerHTML = this.num;
         this.setReady(false);
@@ -249,6 +264,10 @@ Dice.prototype.setReady = function(bool) {
     this.ready = bool;
     if(bool) {
         document.getElementById("dice").classList.add("hl");
+        if(this.game.currPlayer==this.game.playerId) 
+            document.getElementById("dice").innerHTML = "roll";
+        else
+            document.getElementById("dice").innerHTML = "wait";
     }else{
         document.getElementById("dice").classList.remove("hl");
     }
