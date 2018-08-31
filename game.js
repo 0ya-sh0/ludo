@@ -19,7 +19,6 @@ game.prototype.endGame = function() {
         delete this.ps[i].gameId;
         this.ps[i].disconnect();
     }
-     //delete games[id];
 }
 
 module.exports = game;

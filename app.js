@@ -1,11 +1,11 @@
 const mexpress = require('express');
 const mhttp = require('http');
 const mio = require('socket.io');
+const Games = require('./games');
 
 const app = mexpress();
 const http = mhttp.Server(app);
 const io = mio(http);
-const Games = require('./games');
 
 const ipadd2= '192.168.43.1';
 const ipadd1 = '0.0.0.0';
