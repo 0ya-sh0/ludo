@@ -5,8 +5,8 @@ const mio = require('socket.io');
 const app = mexpress();
 const http = mhttp.Server(app);
 const io = mio(http);
+const Games = require('./games');
 
-//const games = new Map();
 const ipadd2= '192.168.43.1';
 const ipadd1 = '0.0.0.0';
 const ipadd = ipadd1;
@@ -28,6 +28,6 @@ app.get('/ludo.js',function(req,res){
 	res.sendFile(__dirname + '/client/ludo.js');
 });
 
-io.on("connection",function(socket) {
-	console.log('user');	
-})
+const games = new Games();
+
+io.on("connection",(sock)=>games.connectionHandler(sock));

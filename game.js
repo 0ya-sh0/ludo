@@ -22,4 +22,4 @@ game.prototype.endGame = function() {
      //delete games[id];
 }
 
-exports = game;
+module.exports = game;
