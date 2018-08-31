@@ -81,7 +81,6 @@ games.prototype.endGameHandler = function(socket, id) {
 
 games.prototype.connectionHandler = function(socket) {
     console.log('user connected...');
-    console.log(this)
     socket.on('joinGame',(function(id) {
             this.joinGameHandler(socket, id);
         }).bind(this)

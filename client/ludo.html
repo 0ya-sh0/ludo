@@ -5,6 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="ludo.css" >
     </head>
     <body>
+        <h1>Ludo</h1>
+        <div id ="input-container">
+            <span>Id : <span>
+            <input id="gid" type="text"><br>
+            <button id="btn-submit" onclick="submitId()">Submit</button>
+        </div>
+        <div id = "game-div">
         <table class="game-table">
             <tr> 
                 <td rowspan="6" colspan="6" class="home">
@@ -187,6 +194,7 @@
        <!-- <div class="container-token">            
             <div class="token p2"></div>
         </div>-->
+        </div>
         <script src="/socket.io/socket.io.js"></script>
         <script src="ludo.js"></script>
     </body>

@@ -1,17 +1,33 @@
 
 
-var game, socket;
-window.onload = function() {
-      game = new Game();
-      socket = io();
-      socket.emit("joinGame","1234");
+var game, socket = new io(), gameId, playerId;
+/*window.onload = function() {
+    socket = new io();
+}*/
+
+var submitId = function() {
+    gameId = document.getElementById("gid").value;
+    socket.emit("joinGame",gameId);
+}
+
+socket.on("startGame",function(gameId,playerId) {
+    createGame(gameId,playerId);
+});
+
+var createGame = function(gameId,playerId) {
+    game = new Game(socket,gameId,playerId);
+    document.getElementById("input-container").style.display = "none";
+    document.getElementById("game-div").style.display = "block";
 }
 
 /*
  *      GAME
  */
 
-function Game() {
+function Game(socket,gameId,playerId) {
+    this.socket = socket;
+    this.gameId = gameId;
+    this.playerId = playerId;
     this.appendContainers();
     this.gComplete = false;
     this.players = [];
@@ -22,6 +38,7 @@ function Game() {
     this.currPlayer = 0;
     this.dice = new Dice(this);
     this.changePlayer(-1); 
+    this.socket.emit("joinGame","1234");
 }
 
 Game.prototype.appendContainers = function() {
@@ -256,7 +273,7 @@ function Token(player,pid,id,path) {
 
 Token.prototype.highlight = function(bool) {
     var el = document.getElementById(this.cell);
-    console.log(el.id)
+    //console.log(el.id)
     if(bool) {
         el.classList.add("hl");
     }else{

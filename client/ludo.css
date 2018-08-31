@@ -1,7 +1,18 @@
 body {
      background-color:#99b5b3;    
+     text-align: center;
+}
+#btn-submit{
+    margin-top: 0.5cm;
 }
 
+h1 {
+    text-align: center;
+    color: #ff5555;
+}
+#game-div{
+    display: none;
+}
 td{
     background-color:#d5d8e0;
 }
