@@ -6,7 +6,7 @@ function games() {
 
 /**/ 
 games.prototype.handleQuit = function(sock) {
-    //console.log("inside handle");
+   /* //console.log("inside handle");
     if(games.get(sock.gameId).p2s == null){
         games.delete(sock.gameId);
         //delete sock.gameId;
@@ -26,69 +26,74 @@ games.prototype.handleQuit = function(sock) {
     delete games.get(sock.gameId).p1s.gameId;
     games.get(sock.gameId).p1s.disconnect();
     games.delete(sock.gameId);
-    //delete sock.gameId;
+    //delete sock.gameId;*/
 }
 
 games.prototype.joinGameHandler = function(socket, id) {
-    if(socket.gameId != undefined){
-        console.log('smae');
+    if(socket.gameId) {
+        console.log('same user tried again @game: '+id);
         return;
     }
-    if(!games.has(id)){
-        games.set(id,new game(id,socket));
-        socket.gameId= id;
-        console.log("joinNew "+id);
+    if(!this.dict.has(id)){
+        this.dict.set(id,new Game(id,socket));
+        socket.gameId = id;
+        console.log("user created game: "+id);
     }else{
-        if(games.get(id).isGameOn)
+        if(this.dict.get(id).isGameOn)
             return;
-        if(socket.id==games.get(id).p1s.id){
-            console.log("smae");
+        if(socket.id === this.dict.get(id).ps[0].id){
+            console.log("same user tried connecting @game: "+id);
             return;
         }
-        games.get(id).p2s = socket;
-        console.log("joinComplete "+id);
+        const g = this.dict.get(id);
+        g.ps[g.count++] = socket;
         socket.gameId = id;
-        startGame(id);
+        if (g.count == 4) {
+            console.log("all players connected @game: "+id);
+            g.startGame();
+        }
     }
 }
 
 games.prototype.moveHandler = function(socket,cid,g) {
-    console.log(g+" "+cid);
+    /*console.log(g+" "+cid);
     //console.log(games);
     var p1s = games.get(g).p1s;
     var p2s = games.get(g).p2s;
     p1s.emit('moveR',cid);
-    p2s.emit('moveR',cid);
+    p2s.emit('moveR',cid);*/
 }
 
 games.prototype.disconnetHandler = function(socket) {
-    if(socket.gameId != undefined){     
+    /*if(socket.gameId != undefined){     
         handleQuit(socket);
         console.log("unexpected close "+socket.gameId);
         //console.log(games);
     } else {
         console.log('dis');
-    }
+    }*/
 }
 
-game.prototype.endGameHandler = function(socket, id) {
-    endGame(id);
+games.prototype.endGameHandler = function(socket, id) {
+    //endGame(id);
     //
 }
 
 games.prototype.connectionHandler = function(socket) {
     console.log('user connected...');
-    socket.on('joinGame',function(id){
-        this.joinGameHandler(socket, id);
-    });
+    console.log(this)
+    socket.on('joinGame',(function(id) {
+            this.joinGameHandler(socket, id);
+        }).bind(this)
+    )
     socket.on('move',function(cid,g){
-        this.moveHandler(socket, cid, g);
+        //this.moveHandler(socket, cid, g);
     });
     socket.on('endGame',function(id){
-        this.endGameHandler(socket,id);
+        //this.endGameHandler(socket,id);
     });
 	socket.on('disconnect',function(){
-        this.disconnetHandler(socket);
+        //this.disconnetHandler(socket);
 	});
 }
 

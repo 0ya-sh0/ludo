@@ -3,11 +3,12 @@ function game(id,ps0){
     this.ps = new Array(4);
     this.ps[0] = ps0;
     this.isGameOn = false;
+    this.count = 1;
 }
  
 game.prototype.startGame = function() {
     for (const i in this.ps) {
-        ps[i].emit('startGame',this.gameId,i);
+        this.ps[i].emit('startGame',this.gameId,i);
     }
     this.isGameOn = true;
     console.log("starting game: "+this.gameId);

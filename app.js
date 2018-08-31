@@ -29,5 +29,6 @@ app.get('/ludo.js',function(req,res){
 });
 
 const games = new Games();
+const connectionHandler = games.connectionHandler.bind(games);
 
-io.on("connection",(sock)=>games.connectionHandler(sock));
+io.on("connection",(sock)=>connectionHandler(sock));
