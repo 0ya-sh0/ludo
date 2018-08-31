@@ -1,0 +1,25 @@
+{
+  "name": "ludo",
+  "version": "1.0.0",
+  "description": "multiplayer ludo game",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0ya-sh0/ludo.git"
+  },
+  "author": "0ya-sh0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0ya-sh0/ludo/issues"
+  },
+  "homepage": "https://github.com/0ya-sh0/ludo#readme"
+}
