@@ -17,5 +17,13 @@ http.listen(port,ipadd,function(){
 });
 
 app.get('/',function(req,res){
-	res.sendFile(__dirname + 'client/ludo.html');
+	res.sendFile(__dirname + '/client/ludo.html');
+});
+
+app.get('/ludo.css',function(req,res){
+	res.sendFile(__dirname + '/client/ludo.css');
+});
+
+app.get('/ludo.js',function(req,res){
+	res.sendFile(__dirname + '/client/ludo.js');
 });
